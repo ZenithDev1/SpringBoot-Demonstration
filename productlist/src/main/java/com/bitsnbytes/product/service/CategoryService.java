@@ -7,6 +7,8 @@ import com.bitsnbytes.product.repository.CategoryRepository;
 import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.stereotype.Service;
 
+import static com.bitsnbytes.product.mapper.CategoryMapper.toCategoryDTO;
+
 @Service
 public class CategoryService {
 
@@ -15,7 +17,7 @@ public class CategoryService {
     public CategoryDTO createCategory(CategoryDTO categoryDTO){
         Category category = CategoryMapper.toCategoryEntity(categoryDTO);
         category = categoryRepository.save(category);
-        return categoryDTO;
+        return CategoryMapper = toCategoryDTO(category);
     }
 
     // get all category

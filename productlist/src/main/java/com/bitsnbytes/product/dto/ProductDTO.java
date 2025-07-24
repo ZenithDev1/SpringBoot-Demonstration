@@ -10,12 +10,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDTO {
-    private int id;
+
+    private Long id;
     private String name;
     private String description;
     private Double price;
     private Long Category_id;
-
-    public ProductDTO(Long id) {
-    }
 }
