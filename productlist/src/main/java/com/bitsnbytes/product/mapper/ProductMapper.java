@@ -8,18 +8,18 @@ import com.bitsnbytes.product.repository.CategoryRepository;
 public class ProductMapper {
 
     // entity to DTO
-    public static ProductDTO toProductEntity(Product product){
+    public static ProductDTO toProductDTO(Product product){
         return new ProductDTO(
-                product.getId();
-                product.getName();
-                product.getDescription();
-                product.getPrice();
-                product.getCategory().getId();
+                product.getId(),
+                product.getName(),
+                product.getDescription(),
+                product.getPrice(),
+                product.getCategory().getId()
         );
     }
 
     // DTO to entity
-    public static Product toProduct(ProductDTO productDTO, Category category){
+    public static Product toProductEntity(ProductDTO productDTO, Category category){
         Product product = new Product();
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());

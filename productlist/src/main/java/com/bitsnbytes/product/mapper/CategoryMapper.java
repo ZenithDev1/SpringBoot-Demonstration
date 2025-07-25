@@ -5,17 +5,18 @@ import com.bitsnbytes.product.entity.Category;
 
 public class CategoryMapper {
 
-    public static CategoryDTO toCategoryEntity(CategoryDTO categoryDTO) {
+    public static CategoryDTO toCategoryDTO(Category category) {
         if (category == null) {
             return null;
         }
-        Category category = new Category();
+        CategoryDTO categoryDTO = new CategoryDTO();
 
         categoryDTO.setId(category.getId());
-        category.setName(categoryDTO.getName());
-        categoryDTO.setProducts(category.getProducts().stream().map(ProductMapper::toProductDTO).toList());
+        categoryDTO.setName(category.getName());
+        categoryDTO.setProducts(category.getProducts().stream()
+                .map(ProductMapper::toProductDTO).toList());
 
-        return category;
+        return categoryDTO;
     }
     public static Category toCategoryEntity(CategoryDTO categoryDTO){
         Category category = new Category();

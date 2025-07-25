@@ -13,16 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class CategoryController {
 
+
     private CategoryService categoryService;
     // getAllCategories
-
-
     // create Categories
     @PostMapping
     public CategoryDTO createCategory(@RequestBody CategoryDTO categoryDTO){
         return categoryService.createCategory(categoryDTO);
     }
 
-    // getCategoires by id
+    // get Categories by id
     // deleteCategory
 }
