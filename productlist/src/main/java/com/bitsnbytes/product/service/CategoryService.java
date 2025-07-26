@@ -5,16 +5,17 @@ import com.bitsnbytes.product.entity.Category;
 import com.bitsnbytes.product.mapper.CategoryMapper;
 import com.bitsnbytes.product.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
-import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.resource.ResourceUrlProvider;
 
-import static com.bitsnbytes.product.mapper.CategoryMapper.toCategoryDTO;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class CategoryService {
 
 
+    private final ResourceUrlProvider resourceUrlProvider;
     private CategoryRepository categoryRepository;
     
     //create category
@@ -25,6 +26,19 @@ public class CategoryService {
 
     }
     // get all category
-    // get category  by id
+    public List<CategoryDTO> getAllCategories(){
+        return categoryRepository.findAll().stream().map(CategoryMapper::toCategoryDTO).toList();
+    }
+
+    // get category by id
+    public CategoryDTO getCategoryById(Long id){
+        Category category = categoryRepository.findById(id).orElseThrow(()-> new RuntimeException("Category not found"));
+        return CategoryMapper.toCategoryDTO(category);
+    }
+
     // delete category
+    public String deleteCategory(Long id){
+        categoryRepository.deleteById(id);
+        return "Category" + id + "has been deleted";
+    }
 }
