@@ -38,11 +38,31 @@ public class ProductService {
     }
 
     // get product by Id
-
     public ProductDTO getProductById(Long id){
         Product product = productRepository.findById(id).
                 orElseThrow(() -> new RuntimeException("Product not Found!"));
         return ProductMapper.toProductDTO(product);
+    }
+
+    // update product
+    public ProductDTO updateProduct(Long id, ProductDTO productDTO){
+        Product product = productRepository.findById(id).
+                orElseThrow(() -> new RuntimeException("Product not Found!"));
+        Category category = categoryRepository.findById(productDTO.getCategory_id())
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        product.setName(productDTO.getName());
+        product.setDescription(productDTO.getDescription());
+        product.setPrice(productDTO.getPrice());
+        product.setCategory(category);
+        productRepository.save(product);
+        return ProductMapper.toProductDTO(product);
+    }
+
+    //delete product
+    public String deleteProduct(Long id){
+        productRepository.deleteById(id);
+        return "Product "+id+"has been deleted!";
     }
 
 }
