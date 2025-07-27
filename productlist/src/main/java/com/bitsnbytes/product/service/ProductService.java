@@ -9,6 +9,8 @@ import com.bitsnbytes.product.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class ProductService {
@@ -28,8 +30,19 @@ public class ProductService {
 
         return ProductMapper.toProductDTO(product);
     }
-    // updateProduct
-    // getProduct by id
-    // deleteProduct
+
+    //Get all Product
+
+    public List<ProductDTO> getAllProducts(){
+        return productRepository.findAll().stream().map(ProductMapper::toProductDTO).toList();
+    }
+
+    // get product by Id
+
+    public ProductDTO getProductById(Long id){
+        Product product = productRepository.findById(id).
+                orElseThrow(() -> new RuntimeException("Product not Found!"));
+        return ProductMapper.toProductDTO(product);
+    }
 
 }
