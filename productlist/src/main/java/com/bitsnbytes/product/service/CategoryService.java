@@ -26,7 +26,7 @@ public class CategoryService {
         Optional<Category> optionalCategory = categoryRepository.findByName(categoryDTO.getName());
         if(optionalCategory.isPresent()){
             throw new CategoryAlreadyExistsException("Category"
-                    +categoryDTO.getName()+" already exists");
+                    +categoryDTO.getName()+" already exists!");
         }
         Category category = CategoryMapper.toCategoryEntity(categoryDTO);
         category = categoryRepository.save(category);
