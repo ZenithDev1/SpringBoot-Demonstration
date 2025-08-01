@@ -13,4 +13,9 @@ public class GlobalExceptionHandler extends RuntimeException {
         return  ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
 
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<String> handleCategoryNotFoundException(CategoryAlreadyExistsException ex){
+        return  ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    }
+
 }
