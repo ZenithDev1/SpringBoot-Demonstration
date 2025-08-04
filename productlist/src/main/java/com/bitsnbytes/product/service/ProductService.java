@@ -23,8 +23,8 @@ public class ProductService {
     public ProductDTO createProduct(ProductDTO productDTO){
 
         Category category = categoryRepository.findById(productDTO.getCategory_id())
-                .orElseThrow(()-> new CategoryNotFoundException("Category id"
-                        + productDTO.getCategory_id()+"not found"));
+                .orElseThrow(()-> new CategoryNotFoundException("Category id "
+                        + productDTO.getCategory_id()+" not found"));
 
         // DTO can not be saved so DTO ---> entity
         Product product = ProductMapper.toProductEntity(productDTO, category);
