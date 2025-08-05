@@ -7,7 +7,6 @@ import com.bitsnbytes.product.mapper.CategoryMapper;
 import com.bitsnbytes.product.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.resource.ResourceUrlProvider;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +16,7 @@ import java.util.Optional;
 public class CategoryService {
 
 
-    private final ResourceUrlProvider resourceUrlProvider;
+
     private CategoryRepository categoryRepository;
     
     //create category

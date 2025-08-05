@@ -25,8 +25,26 @@ public class GlobalExceptionHandler extends RuntimeException {
     }
 
     @ExceptionHandler(CategoryNotFoundException.class)
-    public ResponseEntity<String> handleCategoryNotFoundException(CategoryNotFoundException ex){
-        return  ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    public ResponseEntity<ExceptionResponseDTO> handleCategoryNotFoundException(CategoryNotFoundException ex, WebRequest webRequest){
+
+        ExceptionResponseDTO exceptionResponseDTO = new ExceptionResponseDTO(
+                webRequest.getDescription(false),
+                HttpStatus.NOT_FOUND,
+                ex.getMessage(),
+                LocalDateTime.now()
+        );
+        return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(exceptionResponseDTO);
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ExceptionResponseDTO> handleGlobalException(CategoryNotFoundException ex, WebRequest webRequest){
+
+        ExceptionResponseDTO exceptionResponseDTO = new ExceptionResponseDTO(
+                webRequest.getDescription(false),
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                ex.getMessage(),
+                LocalDateTime.now()
+        );
+        return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exceptionResponseDTO);
+    }
 }
